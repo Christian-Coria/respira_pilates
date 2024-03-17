@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Editar Perfil de {{ user.username }}
+{% endblock title %}
+
+{% block content %}
+
+
+<style>
+   
+    .cont1 {
+
+        
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .form-group {
+        margin-bottom: 20px;
+    }
+    label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+    input[type="text"],
+    input[type="password"],
+    select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    small {
+        font-size: 12px;
+        color: #999;
+    }
+    button {
+        background-color: #007BFF;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+    button:hover {
+        background-color: #0056b3;
+    }
+</style>
+
+<div class="container  mt-5">
+    <div class="row">
+        <h1>Edicion de Usuario</h1>
+        <div class="col-md-12 cont1">
+
+            
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="{{ form.avatar.id_for_label }}">Avatar:</label>
+                    {{ form.avatar }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.nombre.id_for_label }}">Nombre:</label>
+                    {{ form.nombre }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.apellido.id_for_label }}">Apellido:</label>
+                    {{ form.apellido }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.domicilio.id_for_label }}">Domicilio:</label>
+                    {{ form.domicilio }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.telefono.id_for_label }}">Teléfono:</label>
+                    {{ form.telefono }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.celular.id_for_label }}">Celular:</label>
+                    {{ form.celular }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.documento.id_for_label }}">Documento:</label>
+                    {{ form.documento }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.cuit.id_for_label }}">CUIT:</label>
+                    {{ form.cuit }}
+                </div>
+
+                </div>
+                <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+            </form>
+          
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

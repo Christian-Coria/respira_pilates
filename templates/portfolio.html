@@ -1,0 +1,564 @@
+{% extends 'base.html' %}
+
+{% block title %} 
+Portfolio
+{% endblock %}
+
+{% block content %}
+
+<style>
+    /* Estilos generales */
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+    
+    header {
+        background-color: #333;
+        color: #fff;
+        text-align: center;
+        padding: 20px;
+    }
+    
+    nav ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+    
+    nav ul li {
+        display: inline;
+        margin-right: 20px;
+    }
+    
+    nav ul li a {
+        text-decoration: none;
+        color: #333;
+        font-weight: bold;
+    }
+    
+    /* Estilos de secciones */
+    section {
+        padding: 40px;
+        background-image: url('/media/desarrollo/matrix.png');
+        background-attachment: fixed;
+        background-repeat: no-repeat;background-size: cover;
+
+    }
+    
+    .proyecto {
+        margin-bottom: 30px;
+        padding: 20px;
+        background-image: url('/media/desarrollo/matrix.png');
+        background-attachment: fixed;
+        background-repeat: no-repeat;background-size: cover;        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .proyecto img {
+        max-width: 100%;
+        height: auto;
+    }
+    
+    /* Estilos de contacto */
+    #contacto ul {
+        list-style-type: none;
+        padding: 0;
+    }
+    
+    #contacto ul li {
+        margin-bottom: 10px;
+    }
+    
+    #contacto ul li a {
+        text-decoration: none;
+        color: #333;
+    }
+    
+    /* Estilos de pie de página */
+    footer {
+        background-color: #333;
+        color: #fff;
+        text-align: center;
+        padding: 10px;
+    }
+    
+    #proyecto-descripcion {
+        background: linear-gradient(to bottom, #333333, #CCCCCC);
+        color: #ffffff !important; /* Agrega !important */
+        padding: 40px;
+    }
+    
+    #proyecto-descripcion:hover {
+        background: linear-gradient(to bottom, #CCCCCC, #333333);
+        color: #ffe600 !important; /* Agrega !important */
+    }
+    
+  
+    
+    #proyecto-descripcion h2 {
+        font-size: 24px;
+        color: #8f8a8a;
+        margin-bottom: 20px;
+    }
+    
+    #proyecto-descripcion p {
+        font-size: 16px;
+        line-height: 1.5;
+        color: #f5c1c1;
+        margin-bottom: 20px;
+    }
+    
+    #proyecto-descripcion ul {
+        list-style-type: disc;
+        margin-left: 20px;
+        padding-left: 20px;
+    }
+    
+    #proyecto-descripcion ul li {
+        font-size: 16px;
+        line-height: 1.5;
+        color: #f8f5f5;
+    }
+    
+    #proyecto-descripcion h3 {
+        font-size: 20px;
+        color: #e7cdcd;
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
+    
+    /* Estilos para los beneficios */
+    #proyecto-descripcion ul.beneficios {
+        list-style-type: circle;
+    }
+    
+    #proyecto-descripcion ul.beneficios li {
+        font-size: 16px;
+        line-height: 1.5;
+        color: #333;
+    }
+    
+    /* Estilos para las imágenes */
+    #proyecto-descripcion img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+    }
+
+    /* Estilos para la foto circular */
+.foto-circulo {
+    width: 250px; /* Ajusta el tamaño deseado */
+    height: 350px; /* Ajusta el tamaño deseado */
+    border-radius: 50%; /* Hace que el contenedor sea circular */
+    overflow: hidden; /* Oculta cualquier parte de la imagen que se desborde del círculo */
+    
+}
+
+.foto-circulo img {
+   /* Ajusta la imagen al tamaño del contenedor circular */
+    height: auto; /* Mantiene la proporción de la imagen */
+}
+
+/* Estilos para la lista de redes sociales */
+.redes-sociales {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 20px; /* Espacio entre los íconos */
+}
+
+.redes-sociales li {
+    display: inline;
+}
+.sobre-mi-texto {
+    color: blue; /* Cambia el color del texto a azul */
+}
+/* Estilo para la imagen de perfil */
+.perfil-img {
+    width: 200px; /* Ajusta el ancho deseado */
+    height: auto; /* Autoajusta la altura para mantener la proporción */
+    float: right; /* Mueve la imagen al margen derecho */
+    margin-left: 20px; /* Agrega un margen izquierdo para separar del texto */
+}
+/* Estilos para la sección de diplomas y cursos */
+#diplomas-cursos {
+  display: flex; /* Hace que los diplomas estén en una fila */
+  flex-wrap: wrap; /* Permite que los diplomas se envuelvan a la siguiente línea si no caben en el ancho del contenedor */
+  justify-content: center; /* Centra los diplomas horizontalmente */
+}
+
+/* Estilos para cada diploma */
+.diploma {
+  margin: 10px; /* Espacio entre diplomas */
+  text-align: center; /* Centra el contenido del diploma */
+}
+
+/* Estilos para las imágenes de los diplomas */
+.diploma img {
+  max-width: 250px; /* Tamaño máximo de las imágenes */
+  height: auto; /* Mantiene la proporción de aspecto */
+}
+
+/* Estilos para el texto del diploma */
+.diploma p {
+  margin-top: 5px; /* Espacio superior del texto */
+  font-size: 14px; /* Tamaño de fuente del texto */
+}
+
+
+</style>
+
+
+
+
+<body>
+  <section class="container-fluid" style="background-color: #fff; background-image: url('/media/desarrollo/portfolio/1.png'); background-attachment: fixed;background-repeat: no-repeat;background-size: cover;">
+
+    <div class="row justify-content-center">
+        <div id="inicio_bac" class="col-12">
+            <div class="row justify-content-center">
+                <div class="col-12" style="padding-top: 100px; padding-bottom: 100px; position: relative;">
+                                                  <br>
+                        <div class="foto-circulo" itemprop="image" itemscope itemtype="http://schema.org/ImageObject">
+                            <meta itemprop="width" content="300">
+                            <meta itemprop="height" content="300">
+</div>
+                   
+ <br>
+            </div>
+        </div>
+    </div>
+</section>
+
+      <header itemscope itemtype="http://schema.org/WPHeader">
+        <h1 itemprop="headline">Mi Portfolio</h1>
+        <p itemprop="description">Presentando mi trabajo</p>
+    </header>
+    
+    <nav class="m-3" itemscope itemtype="http://schema.org/SiteNavigationElement">
+        <ul>
+            <li itemprop="name"><a href="#inicio">Inicio</a></li>
+            <li itemprop="name"><a href="#proyectos">Proyectos</a></li>
+            <li itemprop="name"><a href="#sobre-mi">Sobre mí</a></li>
+            <li itemprop="name"><a href="#contacto">Contacto</a></li>
+        </ul>
+    </nav>
+
+    <section id="inicio" itemscope itemtype="http://schema.org/AboutPage">
+        <h1 itemprop="name">¡Hola, soy Christian Rodrigo Coria, Hipster (Diseñador de Innovación) - CTO (Chief Technology Officer) - Hustler (an aggressively enterprising person tech) de 'EnLinea'!</h1>
+        <p itemprop="description">Bienvenido a mi portfolio.</p>
+    </section>
+    
+
+
+    <section id="proyectos">
+       <h2>Mi Proyecto</h2>
+        <div class="proyecto">
+            <div class="container m-2" itemscope itemtype="http://schema.org/VideoObject">
+                <div style="width: 30%; height: 30vh; overflow: hidden;">
+                    <video itemprop="contentUrl" autoplay muted loop playsinline style="width: 100%; height: 100%;">
+                      <source src="/media/desarrollo/membresia/videos2.mp4" type="video/mp4">
+                      <!-- Agrega formatos de video adicionales si es necesario -->
+                      Tu navegador no soporta el elemento de video.
+                  </video>
+              </div>
+              <meta itemprop="name" content="Título del Video">
+        <meta itemprop="description" content="Descripción del video">
+    </div>
+
+    <section id="proyecto-tecnicos-shop" itemscope itemtype="http://schema.org/SoftwareApplication">
+        <h2 itemprop="name">Tecnicos.Shop</h2>
+        
+        <section id="proyecto-descripcion" itemprop="description">
+            <div class="container">
+                    <h2>Proyecto: Plataforma Integral de Servicios para el Sector de Reparación y Ventas</h2>
+            
+                    <p>
+                        La Plataforma Integral de Servicios para el Sector de Reparación y Ventas es un ambicioso proyecto que busca revolucionar la forma en que los técnicos, minoristas y negocios involucrados en la reparación y venta de productos interactúan, gestionan sus operaciones y mejoran su rendimiento. Esta plataforma integral se ha diseñado para abordar las necesidades de múltiples actores en este sector y proporcionar una solución completa para todas sus operaciones.
+                    </p>
+            
+                    <h3>Características Clave:</h3>
+            
+                    <ul itemprop="featureList">
+                        <li>
+                            <strong>Tienda Online Incorporada:</strong> La plataforma incluye una tienda en línea fácil de configurar y administrar. Los técnicos y negocios pueden listar sus productos y servicios para su venta directa al público.
+                        </li>
+                        <li>
+                            <strong>Gestión de Inventarios:</strong> Permite llevar un control exhaustivo del inventario, lo que facilita la gestión de existencias y la reposición de productos de manera eficiente.
+                        </li>
+                        <li>
+                            <strong>Caja y Facturación:</strong> Ofrece una solución de caja registradora digital que permite realizar transacciones de venta de manera segura y generar facturas automáticamente.
+                        </li>
+                        <li>
+                            <strong>Cursos de Reparación:</strong> Proporciona acceso a cursos de reparación en línea para técnicos y profesionales que deseen mejorar sus habilidades y conocimientos en el área.
+                        </li>
+                        <li>
+                            <strong>Comunicación Multicanal:</strong> La plataforma ofrece canales de comunicación dedicados para interactuar con clientes minoristas y entre técnicos. Esto incluye chat en vivo, correo electrónico y notificaciones.
+                        </li>
+                        <li>
+                            <strong>Herramientas de Gestión Empresarial:</strong> Ofrece una variedad de herramientas de gestión empresarial, como seguimiento de pedidos, gestión de clientes, análisis de ventas y generación de informes.
+                        </li>
+                        <li>
+                            <strong>Foro de Técnicos:</strong> Facilita la colaboración y el intercambio de conocimientos entre técnicos al proporcionar un foro en línea donde pueden discutir problemas, compartir soluciones y aprender unos de otros.
+                        </li>
+                        <li>
+                            <strong>Publicidad y Promoción:</strong> La plataforma permite a los usuarios promocionar sus productos y servicios a través de herramientas de publicidad integradas, lo que aumenta su visibilidad y alcance.
+                        </li>
+                    </ul>
+            
+                    <h3>Beneficios para los Usuarios:</h3>
+            
+                    <ul itemprop="benefitList">
+                        <li>
+                            <strong>Aumento de las Ventas:</strong> Los minoristas y negocios pueden llegar a una audiencia más amplia a través de la tienda en línea y las herramientas de publicidad, lo que resulta en un aumento de las ventas.
+                        </li>
+                        <li>
+                            <strong>Eficiencia Operativa:</strong> La gestión de inventarios, la caja registradora digital y otras herramientas de gestión empresarial simplifican las operaciones diarias.
+                        </li>
+                        <li>
+                            <strong>Mejora de Habilidades:</strong> Los técnicos pueden mejorar sus habilidades y calificaciones a través de los cursos en línea, lo que los hace más competitivos en el mercado.
+                        </li>
+                        <li>
+                            <strong>Comunicación Fluida:</strong> La comunicación multicanal mejora la relación con los clientes y permite una comunicación efectiva entre técnicos.
+                        </li>
+                        <li>
+                            <strong>Colaboración:</strong> El foro de técnicos fomenta la colaboración y el intercambio de conocimientos en la comunidad.
+                        </li>
+                    </ul>
+                </div>
+            </section>
+            
+        </div>
+       
+    </section>
+
+    <section id="sobre-mi" style="color: white;" itemscope itemtype="http://schema.org/Person">
+        <h2 itemprop="name">Sobre Mí</h2>
+        <img src="/media/desarrollo/portfolio/foto_perfil2.jpg" alt="Mi Foto" class="perfil-img" itemprop="image">
+        <p itemprop="description">Hola, soy Christian Rodrigo Coria, y mi historia en el mundo de la tecnología y los negocios es fascinante. Mi carrera comenzó en 1998 cuando entré como vendedor en el emocionante mundo de la telefonía móvil. En tan solo tres meses, mi dedicación y pasión me llevaron a la oportunidad de dirigir mi primera subagencia de CTI Móvil. Durante dos años, lideré esta subagencia con éxito, adquiriendo habilidades valiosas en ventas y gestión.</p>
+    
+        <p>En el 2001, di un gran paso y me uní a Telecom Personal como parte de una subagencia afiliada a 'Primer S.A.'. Aquí, como subagente oficial de Personal, continué mi ascenso en la industria de las telecomunicaciones. Mi compromiso y conocimiento me permitieron destacarme en la gestión de clientes minoristas y establecer relaciones sólidas en el negocio.</p>
+    
+        <p>Mi espíritu emprendedor me impulsó en 2004 a independizarme de los agentes y abrir mi propio local de telefonía celular. Desde entonces, he sido dueño y operador de negocios exitosos en ventas y servicios de telefonía móvil. Mi experiencia en la industria me ha convertido en un experto en hardware y software, y he brindado soluciones a clientes y empresas de manera constante.</p>
+    
+        <p>En 2019, decidí explorar el mundo de la programación de manera independiente. Este nuevo desafío me llevó a profundizar mis habilidades técnicas y expandir mi conocimiento. Mi pasión por la tecnología me llevó a unirme a CoderHouse en 2021, donde me gradué como programador en Python. A partir de ahí, continué mi aprendizaje con una variedad de cursos en diferentes plataformas, ampliando mis horizontes en el mundo de la programación y el desarrollo web.</p>
+    
+        <p>En 2022, di un paso significativo al inscribirme en la Universidad Tecnológica de Buenos Aires, donde completé una "Diplomatura en Django" en febrero de 2023. Mi formación académica en desarrollo web se sumó a mis habilidades empresariales y técnicas, creando un conjunto único de conocimientos y competencias que me permiten abordar desafíos tecnológicos de manera integral.</p>
+    
+        <p>Me enorgullece mi trayectoria como vendedor, comerciante, dueño de negocios, empleador, estudiante y técnico en telefonía celular. En 2022, además de mi carrera en tecnología, completé mis estudios de Pilates Reformer y me convertí en instructor certificado en esta disciplina. Estas experiencias me han dado una perspectiva única y la capacidad de ofrecer soluciones efectivas a los desafíos tecnológicos y de bienestar. Estoy emocionado por seguir creciendo y explorando nuevas oportunidades en el emocionante mundo de la tecnología, la programación y la salud y bienestar.</p>
+    </section>
+    <br><center>
+        <section id="diplomas-cursos" style="color: white;">
+            <h2>Mis Diplomas y Cursos</h2>
+            <section class="m-3" id="diplomas-cursos">
+                <div class="diploma" itemscope itemtype="https://schema.org/EducationalOccupationalCredential">
+                    <img src="/media/desarrollo/portfolio/CertificadoCoder.png" alt="Diploma 1">
+                    <p itemprop="name">'Programador en Python'</p>
+                </div>
+                <div class="diploma" itemscope itemtype="https://schema.org/EducationalOccupationalCredential">
+                    <img src="/media/desarrollo/portfolio/automatizacion.png" alt="Diploma 2">
+                    <p itemprop="name">'Curso de automatización de tareas con Python'</p>
+                </div>
+                <div class="diploma" itemscope itemtype="https://schema.org/EducationalOccupationalCredential">
+                    <img src="/media/desarrollo/portfolio/ingles.png" alt="Diploma 2">
+                    <p itemprop="name">'#EnglishForDevs #1 - Inglés conversacional'</p>
+                </div>
+                <div class="diploma" itemscope itemtype="https://schema.org/EducationalOccupationalCredential">
+                    <img src="/media/desarrollo/portfolio/interfaces_graficas.png" alt="Diploma 2">
+                    <p itemprop="name">'Interfaces gráficas con Python'</p>
+                </div>
+                <div class="diploma" itemscope itemtype="https://schema.org/EducationalOccupationalCredential">
+                    <img src="/media/desarrollo/portfolio/modulos_paquetes.png" alt="Diploma 2">
+                    <p itemprop="name">'Módulos y Paquetes con Python'</p>
+                </div>
+                <div class="diploma" itemscope itemtype="https://schema.org/EducationalOccupationalCredential">
+                    <img src="/media/desarrollo/portfolio/Paquetes.png" alt="Diploma 2">
+                    <p itemprop="name">'Integración de Django y Vue'</p>
+                </div>
+                <div class="diploma" itemscope itemtype="https://schema.org/EducationalOccupationalCredential">
+                    <img src="/media/desarrollo/portfolio/DjangoCertif.png" alt="Diploma 2">
+                    <p itemprop="name">'Curso avanzado de Bootstrap'</p>
+                </div>
+                
+                <div class="diploma" itemscope itemtype="https://schema.org/EducationalOccupationalCredential">
+                    <img src="/media/desarrollo/portfolio/SmartSelect_20230918_171748_Drive.jpg" alt="Diploma 2">
+                    <p itemprop="name">'Diplomatura Django- Nivel Inicial Arquitectura'</p>
+                </div>
+                <div class="diploma" itemscope itemtype="https://schema.org/EducationalOccupationalCredential">
+                    <img src="/media/desarrollo/portfolio/SmartSelect_20230918_171856_Drive.jpg" alt="Diploma 2">
+                    <p itemprop="name">'Diplomatura Django - Nivel intermedio Diseño de Plataformas'</p>
+                </div>
+                
+                <div class="diploma" itemscope itemtype="https://schema.org/EducationalOccupationalCredential">
+                    <img src="/media/desarrollo/portfolio/SmartSelect_20230918_174748_Drive.jpg" alt="Diploma 2">
+                    <p itemprop="name">'Curso de Pruebas unitarias con Python'</p>
+                </div>
+                
+                
+                <div class="diploma" itemscope itemtype="https://schema.org/EducationalOccupationalCredential">
+                    <img src="/media/desarrollo/portfolio/SmartSelect_20230918_172027_Drive.jpg" alt="Diploma 2">
+                    <p itemprop="name">'Instructor de Plilates Reformer'</p>
+                </div>
+                <div class="diploma" style="width: 500px;">
+                    <img src="/media/desarrollo/portfolio/SmartSelect_20230918_185123_Gallery.jpg" alt="Diploma 2">
+                    <p>'Diplomatura Completa de Django Framework'</p>
+                </div>
+                <div class="diploma" itemscope itemtype="https://schema.org/EducationalOccupationalCredential">
+                    <img src="/media/desarrollo/portfolio/SmartSelect_20230918_171940_Drive.jpg" alt="Diploma 2">
+                    <p itemprop="name">'Instructor de Plilates Reformer'</p>
+                </div>
+            </section>
+            <script type="application/ld+json">
+                {
+                    "@context": "https://schema.org",
+                    "@type": "Person",
+                    "name": "Christian Rodrigo Coria",
+                    "url": "https://tu-sitio-web.com",
+                    "image": "/media/desarrollo/portfolio/foto_perfil.jpg",
+                    "jobTitle": "Desarrollador Web",
+                    "worksFor": {
+                        "@type": "Organization",
+                        "name": "EnLinea"
+                    },
+                    "alumniOf": [
+                        {
+                            "@type": "EducationalOrganization",
+                            "name": "CoderHouse",
+                            "url": "https://coderhouse.com"
+                        },
+                        {
+                            "@type": "CollegeOrUniversity",
+                            "name": "Universidad Tecnológica de Buenos Aires",
+                            "url": "https://utn.edu.ar"
+                        }
+                    ],
+                    "memberOf": {
+                        "@type": "Organization",
+                        "name": "Tecnicos.Shop"
+                    },
+                    "birthPlace": {
+                        "@type": "Place",
+                        "name": "Tu Ciudad"
+                    },
+                    "birthDate": "Fecha de Nacimiento",
+                    "address": {
+                        "@type": "PostalAddress",
+                        "addressLocality": "Tu Ciudad",
+                        "addressRegion": "Tu Provincia",
+                        "addressCountry": "Tu País"
+                    },
+                    "email": "tu-correo@gmail.com",
+                    "telephone": "Tu número de teléfono",
+                    "description": "Breve descripción sobre ti y tus habilidades.",
+                    "educationalCredentialAwarded": [
+                        {
+                            "@type": "EducationalOccupationalCredential",
+                            "name": "Programador en Python",
+                            "image": "/media/desarrollo/portfolio/CertificadoCoder.png"
+                        },
+                        {
+                            "@type": "EducationalOccupationalCredential",
+                            "name": "Curso de automatización de tareas con Python",
+                            "image": "/media/desarrollo/portfolio/automatizacion.png"
+                        },
+                        {
+                            "@type": "EducationalOccupationalCredential",
+                            "name": "#EnglishForDevs #1 - Inglés conversacional",
+                            "image": "/media/desarrollo/portfolio/ingles.png"
+                        },
+                        {
+                            "@type": "EducationalOccupationalCredential",
+                            "name": "Interfaces gráficas con Python",
+                            "image": "/media/desarrollo/portfolio/interfaces_graficas.png"
+                        },
+                        {
+                            "@type": "EducationalOccupationalCredential",
+                            "name": "Módulos y Paquetes con Python",
+                            "image": "/media/desarrollo/portfolio/modulos_paquetes.png"
+                        },
+                        {
+                            "@type": "EducationalOccupationalCredential",
+                            "name": "Integración de Django y Vue",
+                            "image": "/media/desarrollo/portfolio/Paquetes.png"
+                        },
+                        {
+                            "@type": "EducationalOccupationalCredential",
+                            "name": "Curso avanzado de Bootstrap",
+                            "image": "/media/desarrollo/portfolio/DjangoCertif.png"
+                        },
+                        {
+                            "@type": "EducationalOccupationalCredential",
+                            "name": "Diplomatura Django- Nivel Inicial Arquitectura",
+                            "image": "/media/desarrollo/portfolio/SmartSelect_20230918_171748_Drive.jpg"
+                        },
+                        {
+                            "@type": "EducationalOccupationalCredential",
+                            "name": "Diplomatura Django - Nivel intermedio Diseño de Plataformas",
+                            "image": "/media/desarrollo/portfolio/SmartSelect_20230918_171856_Drive.jpg"
+                        },
+                        {
+                            "@type": "EducationalOccupationalCredential",
+                            "name": "Curso de Pruebas unitarias con Python",
+                            "image": "/media/desarrollo/portfolio/SmartSelect_20230918_174748_Drive.jpg"
+                        },
+                        {
+                            "@type": "EducationalOccupationalCredential",
+                            "name": "Instructor de Pilates Reformer",
+                            "image": "/media/desarrollo/portfolio/SmartSelect_20230918_172027_Drive.jpg"
+                        },
+                        {
+                            "@type": "EducationalOccupationalCredential",
+                            "name": "Diplomatura Completa de Django Framework",
+                            "image": "/media/desarrollo/portfolio/SmartSelect_20230918_185123_Gallery.jpg"
+                        },
+                        {
+                            "@type": "EducationalOccupationalCredential",
+                            "name": "Instructor de Pilates Reformer",
+                            "image": "/media/desarrollo/portfolio/SmartSelect_20230918_171940_Drive.jpg"
+                        }
+                    ]
+                }
+                </script>
+                
+        </center>
+
+        <section id="contacto" style="color: white;">
+            <h2>Contacto</h2>
+            <p>Puedes contactarme en <a href="mailto:desbloqueoenlinea@gmail.com">Mi Correo GMAIL</a> o a través de mis redes sociales:</p>
+            <ul class="redes-sociales">
+                <li><a href="https://linkedin.com/in/christian-coria-7114bba4" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-linkedin" viewBox="0 0 16 16">
+                    <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/>
+                  </svg></a></li>
+                <!-- <li><a href="https://twitter.com/tu-usuario" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-twitter" viewBox="0 0 16 16">
+                    <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"/>
+                  </svg></a></li> -->
+                <li><a href="https://github.com/Christian-Coria" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-github" viewBox="0 0 16 16">
+                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.20-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 0.27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                  </svg></a></li>
+            </ul>
+        
+            
+            <script type="application/ld+json">
+                {
+                    "@context": "https://schema.org",
+                    "@type": "Person",
+                    "name": "Christian Rodrigo Coria",
+                    "email": "mailto:desbloqueoenlinea@gmail.com",
+                    "sameAs": [
+                        "https://linkedin.com/in/christian-coria-7114bba4",
+                        "https://twitter.com/tu-usuario",
+                        "https://github.com/Christian-Coria"
+                    ]
+                }
+            </script>
+        </section>
+        
+
+    <footer>
+        <p>&copy; 2023 Christian Rodrigo Coria</p>
+    </footer>
+</body>
+
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'base.html' %} {% block title %}Logout {% endblock title%} 
+{% block content %}
+
+<section class="py-5 text-center container" id="logout">
+  <div class="row py-lg-5">
+    <div class="text-center text-light">
+      <img src="/media/desarrollo/logout.png" alt=""
+      class="w-100 rounded-t-5 rounded-tr-lg-0 rounded-bl-lg-5" />
+    </div>
+  </div>
+</section>
+{% include 'snippets/visitantes.html' %}
+{% include 'snippets/integrar_wp.html' %}
+<script>
+  gsap.registerPlugin(ScrollTrigger);
+     
+      const tlLoader = gsap.timeline()
+  gsap.to('#logout', {
+    duration: 2,
+    x: 0,
+    ease: 'linear'
+   })
+
+  //FROM
+
+  gsap.from('#logout', {
+      duration: 3,
+      opacity: 0
+  })
+  let tl = gsap.timeline({ repeat: 1, yoyo: true });
+  tl.from('#logout', {
+      duration: 3,
+      rotate: 360
+  })
+
+</script>
+{% endblock %}

@@ -1,0 +1,228 @@
+
+{% load static %}
+<style>
+    #admin-container {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        width: 120px;
+        height: 120px;
+        cursor: pointer;
+        z-index: 1;
+        transition: all 0.3s ease;
+        opacity: 0.7;
+    }
+    #admin-robot-face {
+        width: 100px;
+        height: 100px;
+    }
+
+    #robot-head {
+        background: linear-gradient(to bottom, #000080, #fff);
+        border-radius: 50%;
+        width: 100px;
+        height: 100px;
+        position: relative;
+    }
+
+    #eyes {
+        display: flex;
+        justify-content: space-between;
+        position: absolute;
+        top: 30px;
+        left: 30px;
+    }
+
+    .eye {
+        background-color: #000;
+        border-radius: 50%;
+        width: 15px;
+        height: 20px;
+    }
+
+    #mouth {
+        position: absolute;
+        top: 50px;
+        left: 40px;
+    }
+
+    .mouth-shape {
+        border: 1px solid #000;
+        border-top: none;
+        width: 40px;
+        height: 15px;
+        position: relative;
+        border-radius: 50%;
+        background: transparent;
+    }
+
+    #admin-options {
+        background: linear-gradient(to bottom, #000080, #00BFFF);
+        position: absolute;
+        top: 120px;
+        right: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        z-index: 2;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+        opacity: 0.8;
+    }
+    
+
+    #speech-bubble {
+        background: linear-gradient(to bottom, #000, #000080);
+        border: 1px solid #000;
+        padding: 10px;
+        border-radius: 10px;
+        max-width: 150px;
+        text-align: center;
+        position: relative;
+    }
+
+    #speech-bubble::before {
+        content: '';
+        position: absolute;
+        top: -10px;
+        left: 50%;
+        margin-left: -10px;
+        border: 10px solid transparent;
+        border-bottom: 10px solid #fff;
+        
+    }
+
+    #page-dropdown {
+        background: linear-gradient(to bottom, #0076B3, #fff);
+        font-family: Arial, sans-serif; /* Cambia el tipo de letra según tus preferencias */
+        color: #333; /* Cambia el color del texto según tus preferencias */
+    }
+    
+    #page-dropdown option {
+        background: rgba(0, 118, 179, 0.7); /* Fondo con transparencia en degradado de azul a blanco */
+        font-family: Arial, sans-serif; /* Cambia el tipo de letra según tus preferencias */
+        color: #fff; /* Cambia el color del texto según tus preferencias */
+    }
+    
+</style>
+
+<div id="admin-container">
+    <div id="admin-robot-face">
+        <div id="robot-head">
+            <div id="eyes">
+                <div class="eye"></div>
+                <div class="eye"></div>
+            </div>
+            <div id="mouth">
+                <div class="mouth-shape"></div>
+            </div>
+        </div>
+    </div>
+    <div id="admin-options" class="hidden">
+        <div id="speech-bubble">
+            <select id="page-dropdown" onchange="navigateToPage(this.value)">
+                <option value="inicio"> Acceso Rápido </option>
+                <option value="crear_cliente">Crear Cliente</option>
+                <option value="clientes">Clientes</option>
+                <option value="reparacion">Reparacion</option>
+                <option value="reparaciones">Reparaciones</option>
+                <option value="administracion">Buscar Rep</option>
+                <option value="tutoriales">Tutoriales</option>
+                <option value="expertos">Expertos</option>
+                <option value="proveedores">Proveedores</option>
+                <option value="herramientas">Herramientas</option>
+                <option value="archivos">Archivos</option>
+                <option value="curso">Curso</option>
+                <option value="caja">Caja</option>
+                <option value="inventario">Inventario</option>
+                <option value="chequear">Chequear Imei</option>
+                
+            </select>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const adminContainer = document.getElementById('admin-container');
+        const adminOptions = document.getElementById('admin-options');
+        const speechBubble = document.getElementById('speech-bubble');
+
+        let isDragging = false;
+        let initialX, initialY;
+
+        adminContainer.addEventListener('mousedown', function(e) {
+            isDragging = true;
+            initialX = e.clientX - adminContainer.getBoundingClientRect().left;
+            initialY = e.clientY - adminContainer.getBoundingClientRect().top;
+        });
+
+        document.addEventListener('mousemove', function(e) {
+            if (isDragging) {
+                const newX = e.clientX - initialX;
+                const newY = e.clientY - initialY;
+                adminContainer.style.left = `${newX}px`;
+                adminContainer.style.top = `${newY}px`;
+            }
+        });
+
+        document.addEventListener('mouseup', function() {
+            isDragging = false;
+        });
+
+        adminContainer.addEventListener('click', function() {
+            if (adminOptions.classList.contains('hidden')) {
+                adminOptions.classList.remove('hidden');
+                adminOptions.style.maxHeight = '500px';
+                speechBubble.style.opacity = 1;
+            } else {
+                adminOptions.classList.add('hidden');
+                adminOptions.style.maxHeight = '0';
+                speechBubble.style.opacity = 0;
+            }
+        });
+    });
+
+    function navigateToPage(pageName) {
+        const pages = {
+            'inicio': 'index',
+            'reparacion': '/servicio_tecnico/crear-ingreso',
+            'crear_cliente': '/servicio_tecnico/crear-cliente',
+            'clientes': '/servicio_tecnico/listar-clientes',
+            'tutoriales': '/servicio_tecnico/lista-tutoriales',
+            'expertos': '/servicio_tecnico/listar-especialistas',
+            'reparaciones': '/servicio_tecnico/listar-ingresos',
+            'proveedores': '/servicio_tecnico/listar-proveedores',
+            'herramientas': '/servicio_tecnico/herramientas',
+            'archivos': '/servicio_tecnico/archivos',
+            'curso': '/servicio_tecnico/curso',
+            'administracion': '/servicio_tecnico/buscar',
+            'caja': '/servicio_tecnico/caja',
+            'inventario': '/servicio_tecnico/inventario',
+            'chequear': '/servicio_tecnico/check-imei',
+        };
+
+        const selectedPageURL = pages[pageName];
+
+        if (selectedPageURL) {
+            window.location.href = selectedPageURL;
+        } else {
+            alert('La página solicitada no existe.');
+        }
+    }
+</script>
+
+ <script>
+    let isAvatarSolid = false;
+    
+    document.getElementById('admin-container').addEventListener('click', function() {
+        if (isAvatarSolid) {
+            document.getElementById('admin-robot-face').style.opacity = 0.7; // Transparencia
+        } else {
+            document.getElementById('admin-robot-face').style.opacity = 1; // Sin transparencia
+        }
+        isAvatarSolid = !isAvatarSolid;
+    });
+</script>

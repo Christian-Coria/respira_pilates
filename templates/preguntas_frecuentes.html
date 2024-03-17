@@ -1,0 +1,32 @@
+
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Preguntas Frecuentes{% endblock %}
+{% block content %}
+    <hr>
+    <div class="container">
+        <div class="row">
+            <q class="blockquote" style="background-color:#CCD1D0 ">
+                {% for pregunta in preguntas %}
+                    <h2>{{pregunta.pregunta}}</h2>
+                    <p>{{pregunta.descripcion}}</p>
+
+                    <!-- Agregar Schema.org para cada pregunta -->
+                    <script type="application/ld+json">
+                        {
+                            "@context": "https://schema.org",
+                            "@type": "QAPage",
+                            "mainEntity": {
+                                "@type": "Question",
+                                "name": "{{ pregunta.pregunta }}",
+                                "text": "{{ pregunta.descripcion }}"
+                            }
+                        }
+                    </script>
+                {% endfor %}
+            </q>
+        </div>
+    </div>
+    <hr>
+    <br>
+{% endblock %}

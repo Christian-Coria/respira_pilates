@@ -1,0 +1,200 @@
+{% extends 'base.html' %} {% block title %} Contacto {% endblock title%} 
+{% block content %}
+{% load static %}
+
+<section class="py-5 text-center container">
+  <div class="row py-lg-5">
+    <div class="text-center text-light">
+      <h3 class="mb-5 display-4 titulo"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-envelope-paper-fill" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M6.5 9.5 3 7.5v-6A1.5 1.5 0 0 1 4.5 0h7A1.5 1.5 0 0 1 13 1.5v6l-3.5 2L8 8.75l-1.5.75ZM1.059 3.635 2 3.133v3.753L0 5.713V5.4a2 2 0 0 1 1.059-1.765ZM16 5.713l-2 1.173V3.133l.941.502A2 2 0 0 1 16 5.4v.313Zm0 1.16-5.693 3.337L16 13.372v-6.5Zm-8 3.199 7.941 4.412A2 2 0 0 1 14 16H2a2 2 0 0 1-1.941-1.516L8 10.072Zm-8 3.3 5.693-3.162L0 6.873v6.5Z"/>
+      </svg></br>Contactanos</h3>
+<p>Envíanos tus sugerencias, avisos, notificaciones o consultas. Estamos aquí para ayudarte.</p>
+
+      
+           <h2>Envia un Mensaje por WhatsApp</h2>
+<center>
+    <!-- Formulario para enviar mensajes de WhatsApp -->
+    <div class="form-group">
+        <label for="message"></label>
+        <textarea class="form-field" id="message" rows="4" placeholder="Escribe tu mensaje aquí"></textarea>
+    </div>
+    <button type="button" class="btn btn-primary" id="whatsappButton">Enviar por WhatsApp</button>
+</div></div>
+</div>
+
+<script>
+    document.getElementById("whatsappButton").addEventListener("click", function () {
+        const countryCode = "+54";
+        const phoneNumber = "3515205342";
+
+        let message = `
+Hola 👋, me pongo en contacto con ustedes 
+`;
+
+        // Agregar mensaje adicional si existe
+        const additionalMessage = document.getElementById("message").value.trim();
+        if (additionalMessage) {
+            // Agregar línea separadora y mensaje adicional al mensaje principal
+            message += `\n\nPara: ${additionalMessage} ¡Gracias! 😊👋 Mensaje enviado desde  Tecnicos.Shop!
+`;
+        }
+
+        // Codificar el mensaje completo antes de abrir la ventana de WhatsApp
+        message = encodeURIComponent(message);
+
+        const api_url = `https://api.whatsapp.com/send?phone=${countryCode}${phoneNumber}&text=${message}`;
+        window.open(api_url, "_blank");
+    });
+</script>
+</section>
+
+
+
+
+{% comment %} <div class="container">
+
+  <!-- The Modal -->
+  <div class="modal" id="mayorista">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Mayorista</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class ="row justify-content-around">
+                    {% if user.is_authenticated %}
+                    {% else %}
+                        <div>
+                            <a href="{% url 'login' %}">
+                                <button id="login_m" type="button" class="btn btn-danger"  >
+                                    Login
+                                </button>
+                            </a>
+                        </div><!--
+                        <div>
+                            <button id="registrarme_m" type="button" class="btn btn-danger"  >
+                                Cambiar Clave
+                            </button>
+                        </div>-->
+                        <div>
+                            <a href="{% url 'registro' %}">
+                                <button id="registrarme_m" type="button" class="btn btn-danger"  >
+                                    Registrarme
+                                </button>
+                            </a>
+                        </div>
+                    {% endif %}
+                    </div>
+                </div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <div class ="row justify-content-around">
+                        {% if user.is_authenticated %}
+                        <div class="col-12">
+                            <p>Para accecer a la compra mayorista debe de tener un usuario y 
+                            tener la clave mayorista de la semana. Si su clave no está actualizada
+                            ingresela para acceder a los descuentos.</p>
+                        </div> 
+                        {% else %}
+                        <div class="col-12">
+                            <p>Para accecer a la compra mayorista debe de tener un usuario y 
+                            tener la clave mayorista de la semana. Si su clave no está actualizada
+                            <b style="color:#f00;">luego de registrarse</b> regrese aquí 
+                            e ingrese la clave el campo que aparecerá y acceda a nuestros descuentos.</p>
+                        </div> 
+                        {% endif %}
+                        {% if user.is_authenticated %}
+                        <div class="col-12 col-md-8">
+                        <form action="/action_page.php">
+                            <div class="form-group">
+                                <input type="email" class="form-control" placeholder="Actualice la Clave Mayorista" id="actualizar_c">
+                            </div>
+                        </form>
+                        </div> 
+                        <div id="resulado_actualizar_clave" style="background-color:#f00; color:#fff" class="col-12 col-md-8"> 
+                        </div>  
+                        {% endif %}        
+                    </div>
+                </div>     
+            </div>
+        </div>
+  </div>
+</div> 
+     
+ <div class="container-fluid"   >
+    <div class="row reflexion justify-content-around align-items-center border" style="padding-top:20px;">   
+        <div class="col-12 col-md-5 contacto_form" style="padding-bottom:15px;">
+                    <h1 class="h1juan" style="padding-left:15px;">Contacto</h1>    
+                    <form id="contact" action="" method="post" class="col-xs-12">{% csrf_token %} 		
+                        <div class="col-12 form-group" >
+                            {{form }}
+                        </div> 
+                        <div class="row justify-content-between">
+                            <div class="col-4"></div>
+                            <div class="col-4" style="padding-right:30px;">
+                                <button type="submit"  class=" col-12 btn btn-danger">Enviar</button>
+                            </div>
+                        </div>                        
+                    </form>
+        </div>    
+        <div class="col-12 col-md-6" style="padding:0px;">
+            <div>
+                <a href="#">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3280.5144321461516!2d-58.50340768460474!3d-34.69220258043679!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcced3374e2b5b%3A0x6f2e1299593ef5ba!2sCnel.%20Thorne%20555%2C%20B1768CYE%20Villa%20Madero%2C%20Provincia%20de%20Buenos%20Aires!5e0!3m2!1ses!2sar!4v1617891403253!5m2!1ses!2sar" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </a>
+            </div>
+        </div>         
+     </div>
+ </div>  
+
+    
+<section class="container-fluid ">
+    <div class="row" style="padding-top:10px; ">
+        <div class="col-12" style="padding:0px;  ">
+           <br/> 
+        </div>
+    </div>
+</section>
+   
+  
+
+
+
+{% endblock %}
+{% block javascript %}
+<script src="https://cdn.jsdelivr.net/jquery.cookie/1.4.1/jquery.cookie.min.js"></script> 
+<script type="text/javascript" src="{% static 'js/juan_ajax.js' %}"></script>
+
+ 
+     
+
+	<script>
+		$("#id_fecha").css({'display':'none'});
+		//$("#id_fecha").parent().find("label").css({'display':'none'});
+		$("#id_estado_respuesta").css({'display':'none'});
+		$("#id_estado_respuesta").parent().find("label").css({'display':'none'});
+		
+		
+		$("#formulario_contacto li").css({'list-style':'none'});
+ 
+		//$("#formulario_contacto li label").css({'width':"100%", 'text-align':'center',});
+		//$("#formulario_contacto li input").css({'width':"100%", 'text-align':'center',});
+
+		$("input").css({'width':"100%", 'text-align':'center', 'margin-bottom':'7px'});
+		$("textarea").css({'width':"100%", 'text-align':'center',});
+
+
+		$("#id_nombre").attr("placeholder", "Nombre");
+		$("#id_descripcion").attr("placeholder", "Descripcion");
+		$("#id_mail").attr("placeholder", "Mail");
+		$("#id_telefono").attr("placeholder", "Teléfono");
+		$("#id_captcha_1").attr("placeholder", "Captcha");
+	</script>
+	
+	
+	 {% endcomment %}
+	
+{% endblock %}

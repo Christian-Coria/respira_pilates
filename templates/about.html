@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+
+{% block title %} 
+Sobre Nosotros
+{% endblock %}
+
+{% block content %}
+<style>
+  .foto-circulo {
+    width: 250px; /* Ajusta el tamaño deseado */
+    height: 350px; /* Ajusta el tamaño deseado */
+    border-radius: 50%; /* Hace que el contenedor sea circular */
+    overflow: hidden; /* Oculta cualquier parte de la imagen que se desborde del círculo */
+    
+}
+
+.foto-circulo img {
+    width: 100%; /* Ajusta la imagen al tamaño del contenedor circular */
+    height: auto; /* Mantiene la proporción de la imagen */
+}
+  /* Estilo para la imagen de perfil */
+.perfil-img {
+    width: 200px; /* Ajusta el ancho deseado */
+    height: auto; /* Autoajusta la altura para mantener la proporción */
+    float: right; /* Mueve la imagen al margen derecho */
+    margin-left: 20px; /* Agrega un margen izquierdo para separar del texto */
+}
+</style>
+<section class="container-fluid " >
+  <div class="row justify-content-center">
+      <div id="inicio_bac" class="col-12"  >
+        <div class="row justify-content-center">
+          <div class="col-10  " style="padding-top:100px; padding-bottom:100px;  ">
+            
+              <br>
+              <div class="foto-circulo">
+                  <img src="/media/desarrollo/portfolio/inteligencia.jfif" alt="Mi Foto">
+              </div>>
+             
+              <br>
+            </a>
+          </div>
+        </div>          
+      </div>
+  </div>
+</section>
+<header>
+
+<section class="py-5 text-center container">
+  <div class="row py-lg-5">
+    <div class="col-lg-6 col-md-8 mx-auto">
+      <h1 class="fs-2 fw-light titulo"><svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="currentColor" class="svgsap bi bi-people-fill" viewBox="0 0 16 16">
+        <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7Zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216ZM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/>
+      </svg> Quienes Somos <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="currentColor" class="svgsap bi bi-people-fill" viewBox="0 0 16 16">
+        <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7Zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216ZM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/>
+      </svg></h1>
+ 
+    </div>
+  </div>
+</section>
+
+<main class="flex-shrink-0">
+  <div class="container ">
+
+      <div>
+          <h1>Bienvenidos a Tecnicos.Shop - Comunidad Tecnológica</h1>
+      </div>
+
+    <section>
+        <p class="lead" align="justify">Somos un equipo de técnicos y programadores con una pasión compartida: la tecnología. Nos enorgullece ofrecer una
+            plataforma única diseñada para unir a la comunidad tecnológica a través del aprendizaje colaborativo y el crecimiento
+            conjunto.</p>
+
+        <p class="lead" align="justify">Con años de experiencia en el campo, entendemos la importancia de mantenerse actualizado en un mundo tecnológico en constante
+            evolución. En Tecnicos.Shop, no solo encontrará recursos educativos de alta calidad, sino también una comunidad vibrante y
+            solidaria.</p>
+
+        <p class="lead" align="justify">Creemos en el poder del aprendizaje colaborativo, donde cada miembro aporta su experiencia única para enriquecer la
+            experiencia de todos. Ya sea que seas un técnico experimentado o un apasionado programador, hay espacio para ti en nuestra
+            comunidad.</p>
+
+        <p class="lead" align="justify">Además, estamos comprometidos a utilizar las últimas tecnologías, incluida la inteligencia artificial, para mejorar
+            continuamente nuestra plataforma. Desarrollamos herramientas innovadoras que simplifican los procesos, facilitan el
+            aprendizaje y fomentan el intercambio de conocimientos.</p>
+
+        <p class="lead" align="justify">Únete a Tecnicos.Shop y sumérgete en un entorno donde el conocimiento fluye libremente, las preguntas son bienvenidas y el
+            crecimiento es colectivo. ¡Estamos emocionados de tenerte a bordo mientras exploramos juntos el emocionante mundo de la
+            tecnología!</p>
+    </section>
+  </div>
+</main>
+
+
+
+<script>
+  gsap.registerPlugin(ScrollTrigger);
+
+  const tlLoader = gsap.timeline()
+  tlLoader
+    .set('.titulo', { yPercent: 100 })
+    .set('.lead', { opacity: 0 })
+
+    .set('.titulo', {
+      yPercent: -100,
+    })
+    .to('.titulo', {
+      yPercent: 0,
+      duration: 1,
+      stagger: 0.25,
+    })
+    .to('.lead', {
+      opacity: 1,
+      duration: 1,
+      scale: 1.1,
+    })
+    .to('.svgsap', {
+      scrollTrigger: {
+        trigger: '.svgsap',
+        start: '-100 0',
+        scrub: true,
+      },
+      scale: 0.5,
+      duration: 1,
+    })
+    .to('.titulo', {
+      scale: 1.5,
+    });
+</script>
+
+
+{% endblock %}

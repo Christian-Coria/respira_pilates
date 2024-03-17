@@ -1,0 +1,102 @@
+<style>
+    /* Estilo inicial del enlace */
+  .nav-programa a {
+    color: #990000; /* Color de texto */
+    transition: background 0.3s ease; /* Transición suave para el fondo */
+  }
+  
+  /* Estilo del enlace cuando el mouse se posicione sobre él */
+  .nav-programa a:hover {
+    background: linear-gradient(to bottom, #e0d3c2, #4714d279);
+    color: white; /* Cambia el color del texto a blanco */
+  }
+  </style>
+  <div class="container-fluid">
+    <div class="row p-0">
+        <div class="col-12 p-0">
+            <!-- Navbar -->
+                        <nav class="navbar navbar-expand-lg navbar-dark bg-primary fs-5 p-2 d-print-none">
+                <div class="container">
+                  <a class="navbar-brand" href="{% url 'index' %}">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-reception-4" style="color: #DDFF55;" viewBox="0 0 16 16">
+                      <path d="M0 11.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-2zm4-3a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-5zm4-3a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-8zm4-3a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5v11a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-11z"/>
+                    </svg><span style="color: #fff;">Tecnicos.</span><span style="color: #ffe600">Shop</span>
+                  </a>
+                  <i class="fas fa-rss" style="color: #5e9693"></i>
+                  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+              
+                  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto">
+                      {% if request.user.is_authenticated %}
+                      <li class="nav-item mx-2 mx-lg-1">
+                        <a class="nav-link text-center" href="{% url 'index' %}">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-check-fill aling-text-top mb-1" viewBox="0 0 16 16">
+                            <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z"/>
+                            <path d="m8 3.293 4.712 4.712A4.5 4.5 0 0 0 8.758 15H3.5A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z"/>
+                            <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm1.679-4.493-1.335 2.226a.75.75 0 0 1-1.174.144l-.774-.773a.5.5 0 0 1 .708-.707l.547.547 1.17-1.951a.5.5 0 1 1 .858.514Z"/>
+                          </svg><br>Home
+                        </a>
+                      </li>
+                      
+                      </ul>
+                    </li>
+                 
+                      <li class="nav-item dropdown text-center mx-2 mx-lg-1">
+                     
+
+                          
+                        </ul>
+                      </li>
+                                          {% else %}
+
+                   
+                      <li class="nav-item text-center mx-2 mx-lg-1">
+                        <a class="nav-link" href={% url 'perfil' %}>
+                          {% if request.user.datosusuario.avatar %}                        <img src={{request.user.datosusuario.avatar.url}} alt="" style="width:50px;" class="rounded-pill"><br>
+                          
+                          {% else %}
+                          {{request.user.username}}
+                          {% endif%}
+                          </a>
+                      </li>
+                      <li class="nav-item text-center mx-2 mx-lg-1">
+                        <a class="nav-link pr-5 pl-2" href={% url 'logout' %}>
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-escape" viewBox="0 0 16 16">
+                            <path d="M8.538 1.02a.5.5 0 1 0-.076.998 6 6 0 1 1-6.445 6.444.5.5 0 0 0-.997.076A7 7 0 1 0 8.538 1.02Z"/>
+                            <path d="M7.096 7.828a.5.5 0 0 0 .707-.707L2.707 2.025h2.768a.5.5 0 1 0 0-1H1.5a.5.5 0 0 0-.5.5V5.5a.5.5 0 0 0 1 0V2.732l5.096 5.096Z"/>
+                          </svg></br>
+                          Cerrar Sesion</a>
+                      </li>
+                      
+                      
+
+
+                      
+  
+                      <li class="nav-item text-center mx-2 mx-lg-1">
+                        <a class="nav-link active" href={% url 'login' %}>
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="fa-spin bi bi-box-arrow-in-right mb-1" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z"/>
+                            <path fill-rule="evenodd" d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+                          </svg></br>
+                          Ingresar</a>
+                      </li>
+                      <li class="nav-item text-center mx-2 mx-lg-1">
+                        <a class="nav-link active pr-3" href={% url 'registro' %}>
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-lines-fill" viewBox="0 0 16 16">
+                            <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2z"/>
+                          </svg></br>
+                          Registrarse</a>
+                      </li>
+                      
+                      {% endif %}
+                    </ul>
+                </div>
+              </nav>
+  
+              
+          </div>
+      </div>
+  </nav>
