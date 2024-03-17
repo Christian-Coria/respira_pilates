@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}
+Lista de Asistencias
+{% endblock title %}
+{% block body %}
+
+    <h1>Lista de Asistencias</h1>
+    <ul>
+        {% for asistencia in asistencias %}
+            <li>{{ asistencia.usuario.username }} - Clase: {{ asistencia.clase.dia }} - Fecha: {{ asistencia.fecha }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

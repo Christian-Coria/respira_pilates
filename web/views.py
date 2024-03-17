@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.views.generic import View
-from web.models import PreguntasFrecuentes
+from web.models import PreguntasFrecuentes, Gallery
 from django.shortcuts import render
 from .models import VisitCounter
 
@@ -49,6 +49,10 @@ def your_page_view(request):
     return render(request, 'snippets/visitantes.html', {'counter': counter})
 
 
+def gallery(request):
+    posts=Gallery.objects.all()
+    context={"posts":posts}
+    return render(request,"gallery.html",context)
 
 class PortFolio(TemplateView):
     template_name = "portfolio.html"

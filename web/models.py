@@ -22,3 +22,11 @@ class VisitCounter(models.Model):
 
     def __str__(self):
         return self.page_name
+
+
+class Gallery(models.Model):
+    title=models.CharField(max_length=100)
+    img=models.ImageField(upload_to='gallery')
+    timeStamp=models.DateTimeField(auto_now_add=True,blank=True)
+    def __int__(self):
+        return self.id

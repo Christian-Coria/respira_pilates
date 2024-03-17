@@ -4,6 +4,7 @@ from web.views import About
 from web.views import PreguntasFrecuentesVista
 from web.views import reglamento
 from web.views import PortFolio
+from web.views import gallery
 
 urlpatterns = [
     path('',home, name="index"),  
@@ -11,6 +12,7 @@ urlpatterns = [
     path('portfolio/', PortFolio.as_view(), name="portfolio"),
     path("preguntas_frecuentes/", PreguntasFrecuentesVista.as_view(), name="preguntas_frecuentes"),
     path('reglamento/', reglamento, name="reglamento"),
+    path('gallery',gallery,name="gallery"),
 
 
    
